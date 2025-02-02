@@ -10,6 +10,33 @@
   <!-- Turn.js (place it in the same folder, or adjust the path below) -->
   <script src="turn.js"></script>
 </head>
+    <style>
+    /* Minimal CSS to ensure Turn.js can position pages properly */
+    
+    /* Flipbook container should be positioned and have a set size */
+    #flipbook {
+      width: 400px;   /* adjust as needed */
+      height: 300px;  /* adjust as needed */
+      position: relative; /* Turn.js uses absolute positioning for pages */
+      margin: 20px auto;  /* center horizontally, optional */
+      background: #eee;   /* just so we can see the book area */
+    }
+
+    /* Each page inside flipbook */
+    #flipbook > div {
+      /* Turn.js will absolutely position these, 
+         but give them a default background for clarity. */
+      background: #fff;
+    }
+
+    /* Optional: Button styling */
+    button {
+      margin: 10px;
+      padding: 5px 15px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+  </style>
 <body>
 
   <!-- Flipbook Container -->
