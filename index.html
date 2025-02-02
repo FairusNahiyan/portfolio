@@ -2,103 +2,85 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Flipbook with Buttons</title>
+  <title>Flipbook with Arrow Keys</title>
 
-  <!-- jQuery (required for Turn.js v4.1.0 or older) -->
+  <!-- jQuery (needed for Turn.js v4.1.0 or older) -->
   <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
-  <!-- Turn.js (make sure this matches your file location) -->
+  <!-- Turn.js (make sure you have this file in the same folder, or adjust the path) -->
   <script src="turn.js"></script>
 
   <style>
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
       padding: 20px;
-      text-align: center;
+      font-family: Arial, sans-serif;
     }
-
-    /* Flipbook Container */
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
     #flipbook {
       width: 600px;
       height: 400px;
-      margin: 0 auto; /* centers the flipbook */
+      margin: 0 auto;
       background: #fafafa;
     }
-
-    /* Each page inside the flipbook */
     .page {
       width: 600px;
       height: 400px;
-      background-color: #fff;
       border: 1px solid #ccc;
-      /* Add custom styling, images, etc. here */
+      background: white;
       box-sizing: border-box;
       padding: 20px;
-    }
-
-    /* Button container */
-    .book-buttons {
-      margin-top: 20px;
-    }
-
-    .book-buttons button {
-      cursor: pointer;
-      padding: 10px 20px;
-      font-size: 16px;
-      margin: 0 10px;
     }
   </style>
 </head>
 <body>
 
-  <h1>My Flipbook</h1>
+  <h1>Arrow Key Flipbook</h1>
 
-  <!-- Flipbook pages -->
+  <!-- The flipbook container -->
   <div id="flipbook">
     <div class="page">
       <h2>Page 1</h2>
-      <p>Hello from Page 1!</p>
+      <p>This is Page 1 content.</p>
     </div>
     <div class="page">
       <h2>Page 2</h2>
-      <p>This is Page 2.</p>
+      <p>This is Page 2 content.</p>
     </div>
     <div class="page">
       <h2>Page 3</h2>
-      <p>This is Page 3.</p>
+      <p>This is Page 3 content.</p>
     </div>
     <div class="page">
       <h2>Page 4</h2>
-      <p>This is Page 4.</p>
+      <p>This is Page 4 content.</p>
     </div>
+    <!-- Add more pages if desired -->
   </div>
 
-  <!-- Next/Previous Buttons -->
-  <div class="book-buttons">
-    <button id="prevBtn">Previous</button>
-    <button id="nextBtn">Next</button>
-  </div>
-
-  <!-- Initialize Turn.js -->
   <script>
     $(document).ready(function() {
-      // Initialize the flipbook
+      // Initialize Turn.js
       $('#flipbook').turn({
         width: 600,
         height: 400,
-        autoCenter: true    // centers book within its container
-        // other options...
+        autoCenter: true,
+        display: 'double'   // or 'single' if you prefer one page at a time
       });
 
-      // Previous button
-      $('#prevBtn').click(function() {
-        $('#flipbook').turn('previous');
-      });
-
-      // Next button
-      $('#nextBtn').click(function() {
-        $('#flipbook').turn('next');
+      // Listen for keydown events to flip pages
+      document.addEventListener('keydown', function(e) {
+        // ArrowRight or Right key
+        if (e.key === 'ArrowRight') {
+          $('#flipbook').turn('next');
+        }
+        // ArrowLeft or Left key
+        else if (e.key === 'ArrowLeft') {
+          $('#flipbook').turn('previous');
+        }
       });
     });
   </script>
