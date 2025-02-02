@@ -1,88 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Flipbook with Arrow Keys</title>
+  <meta charset="UTF-8">
+  <title>Basic Turn.js Flipbook</title>
 
-  <!-- jQuery (needed for Turn.js v4.1.0 or older) -->
+  <!-- jQuery (for Turn.js 4.1.0 or older) -->
   <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-
-  <!-- Turn.js (make sure you have this file in the same folder, or adjust the path) -->
+  
+  <!-- Turn.js (place it in the same folder, or adjust the path below) -->
   <script src="turn.js"></script>
-
-  <style>
-    body {
-      margin: 0;
-      padding: 20px;
-      font-family: Arial, sans-serif;
-    }
-    h1 {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-    #flipbook {
-      width: 600px;
-      height: 400px;
-      margin: 0 auto;
-      background: #fafafa;
-    }
-    .page {
-      width: 600px;
-      height: 400px;
-      border: 1px solid #ccc;
-      background: white;
-      box-sizing: border-box;
-      padding: 20px;
-    }
-  </style>
 </head>
 <body>
 
-  <h1>Arrow Key Flipbook</h1>
-
-  <!-- The flipbook container -->
+  <!-- Flipbook Container -->
   <div id="flipbook">
-    <div class="page">
-      <h2>Page 1</h2>
-      <p>This is Page 1 content.</p>
-    </div>
-    <div class="page">
-      <h2>Page 2</h2>
-      <p>This is Page 2 content.</p>
-    </div>
-    <div class="page">
-      <h2>Page 3</h2>
-      <p>This is Page 3 content.</p>
-    </div>
-    <div class="page">
-      <h2>Page 4</h2>
-      <p>This is Page 4 content.</p>
-    </div>
-    <!-- Add more pages if desired -->
+    <div>Page 1</div>
+    <div>Page 2</div>
+    <div>Page 3</div>
+    <div>Page 4</div>
+    <!-- Add more pages as needed -->
   </div>
 
+  <!-- Navigation Buttons -->
+  <button id="prev">Previous</button>
+  <button id="next">Next</button>
+
+  <!-- Turn.js Initialization -->
   <script>
     $(document).ready(function() {
-      // Initialize Turn.js
+      // Initialize the flipbook with basic width and height
       $('#flipbook').turn({
-        width: 600,
-        height: 400,
-        autoCenter: true,
-        display: 'double'   // or 'single' if you prefer one page at a time
+        width: 400,
+        height: 300,
+        autoCenter: false  // set to true if you want auto-centering
       });
 
-      // Listen for keydown events to flip pages
-      document.addEventListener('keydown', function(e) {
-        // ArrowRight or Right key
+      // Next button
+      $('#next').click(function() {
+        $('#flipbook').turn('next');
+      });
+
+      // Previous button
+      $('#prev').click(function() {
+        $('#flipbook').turn('previous');
+      });
+
+      // Arrow key navigation
+      $(document).keydown(function(e) {
         if (e.key === 'ArrowRight') {
           $('#flipbook').turn('next');
-        }
-        // ArrowLeft or Left key
-        else if (e.key === 'ArrowLeft') {
+        } else if (e.key === 'ArrowLeft') {
           $('#flipbook').turn('previous');
         }
       });
     });
   </script>
+
 </body>
 </html>
