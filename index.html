@@ -15,24 +15,30 @@
     
     /* Flipbook container should be positioned and have a set size */
       #flipbook {
-    width: 800px;
-    height: 600px;
-    position: relative;
-    margin: 20px auto;
-    background: #111; /* Dark background for contrast */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5), 
-                0 6px 6px rgba(0, 0, 0, 0.4); /* Shadow effect */
-    border-radius: 10px; /* Optional: rounded corners for a polished look */
-    overflow: hidden; /* Ensures content stays within rounded corners */
-  }
-
-  /* Each page inside the flipbook */
-  #flipbook img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensures images fit perfectly */
-    border: 1px solid #ccc; /* Thin border around each page */
-  }
+        width: 800px;
+        height: 600px;
+        position: relative;
+        margin: 20px auto;
+        background: #111;
+        overflow: hidden; /* Prevent content from overflowing */
+        border-radius: 10px; /* Rounded corners */
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5),
+                    0 6px 6px rgba(0, 0, 0, 0.4); /* Default shadow */
+      }
+    
+      /* Shadow only on the right side when closed */
+      #flipbook.closed {
+        box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5),
+                    6px 6px 6px rgba(0, 0, 0, 0.4);
+      }
+    
+      /* Each page inside flipbook */
+      #flipbook img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border: 1px solid #ccc; /* Thin border */
+      }
 
     /* Optional: Button styling */
     button {
