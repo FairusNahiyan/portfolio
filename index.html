@@ -14,25 +14,25 @@
     /* Minimal CSS to ensure Turn.js can position pages properly */
     
     /* Flipbook container should be positioned and have a set size */
-    #flipbook {
-      width: 800px;   /* adjust as needed */
-      height: 600px;  /* adjust as needed */
-      position: relative; /* Turn.js uses absolute positioning for pages */
-      margin: 20px auto;  /* center horizontally, optional */
-      background: #FFF;   /* just so we can see the book area */
-    }
-    #flipbook img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover; /* Ensures full coverage */
-    }
+      #flipbook {
+    width: 800px;
+    height: 600px;
+    position: relative;
+    margin: 20px auto;
+    background: #111; /* Dark background for contrast */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5), 
+                0 6px 6px rgba(0, 0, 0, 0.4); /* Shadow effect */
+    border-radius: 10px; /* Optional: rounded corners for a polished look */
+    overflow: hidden; /* Ensures content stays within rounded corners */
+  }
 
-    /* Each page inside flipbook */
-    #flipbook > div {
-      /* Turn.js will absolutely position these, 
-         but give them a default background for clarity. */
-      background: #fff;
-    }
+  /* Each page inside the flipbook */
+  #flipbook img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures images fit perfectly */
+    border: 1px solid #ccc; /* Thin border around each page */
+  }
 
     /* Optional: Button styling */
     button {
