@@ -14,8 +14,8 @@
   <style>
     /* Flipbook container */
     #flipbook {
-      width: 800px; /* Fixed width for larger screens */
-      height: 600px; /* Fixed height for larger screens */
+      width: 800px; /* Default full width for an open book */
+      height: 600px; /* Fixed height */
       position: relative;
       margin: 20px auto;
       background: #111; /* Dark background for contrast */
@@ -23,12 +23,12 @@
       border-radius: 10px; /* Rounded corners */
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5),
                   0 6px 6px rgba(0, 0, 0, 0.4); /* Default shadow */
-      clip-path: inset(0 0 0 0); /* Default (no clipping) */
+      transition: all 0.3s ease; /* Smooth transition for width and shadow */
     }
 
-    /* Shadow and clipping when closed */
+    /* Flipbook in closed state */
     #flipbook.closed {
-      clip-path: inset(0 50% 0 0); /* Hide the left side */
+      width: 400px; /* Only show the right side */
       box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5),
                   6px 6px 6px rgba(0, 0, 0, 0.4); /* Right-side shadow */
     }
