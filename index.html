@@ -74,35 +74,50 @@
   <button id="next">Next</button>
 
   <!-- Turn.js Initialization -->
-  <script>
-    $(document).ready(function() {
-      // Initialize the flipbook with basic width and height
-      $('#flipbook').turn({
-        width: 800,
-        height: 600,
-        autoCenter: true  // set to true if you want auto-centering
-      });
-
-      // Next button
-      $('#next').click(function() {
-        $('#flipbook').turn('next');
-      });
-
-      // Previous button
-      $('#prev').click(function() {
-        $('#flipbook').turn('previous');
-      });
-
-      // Arrow key navigation
-      $(document).keydown(function(e) {
-        if (e.key === 'ArrowRight') {
-          $('#flipbook').turn('next');
-        } else if (e.key === 'ArrowLeft') {
-          $('#flipbook').turn('previous');
+<script>
+  $(document).ready(function() {
+    // Initialize Turn.js
+    $('#flipbook').turn({
+      width: 800,
+      height: 600,
+      autoCenter: true,
+      display: 'double', // Ensures pages are displayed as pairs
+      when: {
+        start: function(event, pageObject) {
+          // If flipping to the first or last page, add the closed class
+          if (pageObject.next === 1 || pageObject.next === $('#flipbook').turn('pages')) {
+            $('#flipbook').addClass('closed');
+          } else {
+            $('#flipbook').removeClass('closed');
+          }
         }
-      });
+      }
     });
-  </script>
+
+    // Add closed class initially (book is closed at the start)
+    $('#flipbook').addClass('closed');
+
+    // Next button
+    $('#next').click(function() {
+      $('#flipbook').turn('next');
+    });
+
+    // Previous button
+    $('#prev').click(function() {
+      $('#flipbook').turn('previous');
+    });
+
+    // Keyboard navigation
+    $(document).keydown(function(e) {
+      if (e.key === 'ArrowRight') {
+        $('#flipbook').turn('next');
+      } else if (e.key === 'ArrowLeft') {
+        $('#flipbook').turn('previous');
+      }
+    });
+  });
+</script>
+
 
 </body>
 </html>
