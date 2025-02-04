@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Basic Turn.js Flipbook</title>
+  <title>Turn.js Flipbook</title>
 
   <!-- jQuery (for Turn.js 4.1.0 or older) -->
   <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
@@ -18,42 +18,42 @@
       height: 600px;
       position: relative;
       margin: 20px auto;
-      background: #111;
       overflow: hidden;
       border-radius: 10px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5),
-                  0 6px 6px rgba(0, 0, 0, 0.4);
       transition: all 0.3s ease;
     }
 
-    /* Flipbook closed state: Hide the left side */
+    /* Hide left side when closed */
     #flipbook.closed {
-      width: 800px; /* Keep full width */
+      width: 800px;
       overflow: hidden;
-      clip-path: inset(0 0 0 50%); /* Hide the left half */
-      box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5),
-                  6px 6px 6px rgba(0, 0, 0, 0.4);
+      clip-path: inset(0 0 0 50%);
     }
 
-    /* Hide left-side pages when book is closed */
+    /* Ensure right page is visible */
     #flipbook.closed .left-page {
       display: none !important;
     }
 
-    /* Ensure right page remains visible */
     #flipbook.closed .right-page {
       display: block !important;
     }
 
-    /* Each page inside flipbook */
+    /* Remove unwanted background and shadows */
+    .turn-page {
+      box-shadow: none !important;
+      background: none !important;
+    }
+
+    /* Each page */
     #flipbook img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border: 1px solid #ccc;
+      border: none;
     }
 
-    /* Button styling */
+    /* Navigation buttons */
     button {
       padding: 10px 20px;
       font-size: 16px;
@@ -104,30 +104,32 @@
   <!-- Turn.js Initialization -->
   <script>
     $(document).ready(function() {
-      // Initialize Turn.js
       $('#flipbook').turn({
         width: 800,
         height: 600,
         autoCenter: true,
         display: 'double',
+        gradients: false, // Removes Turn.js shadows and gradients
+        acceleration: true,
         when: {
           start: function(event, pageObject) {
             let totalPages = $('#flipbook').turn('pages');
+            
             if (pageObject.next === 1 || pageObject.next === totalPages) {
               $('#flipbook').addClass('closed');
-              $('.left-page').hide(); // Hide left pages when closed
-              $('.right-page').show(); // Ensure right pages are visible
+              $('.left-page').hide();
+              $('.right-page').show();
             } else {
               $('#flipbook').removeClass('closed');
               $('.left-page').show();
               $('.right-page').show();
             }
-            $('#flipbook').turn('update'); // Force update after changing visibility
+
+            $('#flipbook').turn('update'); // Refresh visibility
           }
         }
       });
 
-      // Ensure the book starts in a closed state
       $('#flipbook').addClass('closed');
 
       // Next button
@@ -151,7 +153,7 @@
         }
       });
 
-      // Preload images for better performance
+      // Preload images
       const preloadImages = [
         "images/Book1Cover.png",
         "images/Book1p1.png",
