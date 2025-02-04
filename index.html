@@ -8,7 +8,7 @@
   <!-- jQuery (for Turn.js 4.1.0 or older) -->
   <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
-  <!-- Turn.js (place it in the same folder, or adjust the path below) -->
+  <!-- Turn.js -->
   <script src="turn.js"></script>
 
   <style>
@@ -23,12 +23,14 @@
       border-radius: 10px; /* Rounded corners */
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5),
                   0 6px 6px rgba(0, 0, 0, 0.4); /* Default shadow */
+      clip-path: inset(0 0 0 0); /* Default (no clipping) */
     }
 
-    /* Shadow only on the right side when closed */
+    /* Shadow and clipping when closed */
     #flipbook.closed {
+      clip-path: inset(0 50% 0 0); /* Hide the left side */
       box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5),
-                  6px 6px 6px rgba(0, 0, 0, 0.4);
+                  6px 6px 6px rgba(0, 0, 0, 0.4); /* Right-side shadow */
     }
 
     /* Each page inside flipbook */
