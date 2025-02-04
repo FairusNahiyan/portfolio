@@ -1,157 +1,143 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
-    <script src="turn.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Turn.js Interactive Flipbook</title>
 
-    <style>
-        body {
-            background: #ccc;
-            text-align: center;
-        }
+  <!-- jQuery (for Turn.js 4.1.0 or older) -->
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
-        #book-container {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+  <!-- Turn.js -->
+  <script src="turn.js"></script>
 
-        #book {
-            width: 800px;
-            height: 500px;
-            display: none; /* Initially hidden */
-            position: relative;
-        }
-
-        #cover {
-            width: 800px;
-            height: 500px;
-            background: #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            font-size: 50px;
-            color: white;
-            font-family: Arial, sans-serif;
-        }
-
-        #controls {
-            display: none;
-            margin-top: 20px;
-            font: 20px Arial;
-        }
-
-        /* Clickable areas for turning pages */
-        .click-area {
-            position: absolute;
-            top: 0;
-            width: 50%;
-            height: 100%;
-            cursor: pointer;
-        }
-
-        .left-click { left: 0; }
-        .right-click { right: 0; }
-
-        #book .odd {
-            background-image: linear-gradient(to right, #FFF 95%, #ddd 100%);
-        }
-
-        #book .even {
-            background-image: linear-gradient(to left, #FFF 95%, #ddd 100%);
-        }
-    </style>
-</head>
-<body>
-
-<div id="book-container">
-    <div id="cover">📖 Click to Open</div>
-
-    <div id="book">
-        <div class="click-area left-click"></div>
-        <div class="click-area right-click"></div>
-        <div class="cover"><h1>The Bible</h1></div>
-    </div>
-</div>
-
-<div id="controls">
-    <label for="page-number">Page:</label>
-    <input type="text" size="3" id="page-number"> of <span id="number-pages"></span>
-</div>
-
-<script>
-    var numberOfPages = 1000; 
-
-    function addPage(page, book) {
-        if (!book.turn('hasPage', page)) {
-            var element = $('<div />', {
-                'class': 'page ' + ((page % 2 == 0) ? 'odd' : 'even'),
-                'id': 'page-' + page
-            }).html('<i class="loader"></i>');
-
-            book.turn('addPage', element, page);
-            setTimeout(function () {
-                element.html('<div class="data">Data for page ' + page + '</div>');
-            }, 1000);
-        }
+  <style>
+    /* Flipbook container */
+    #flipbook {
+      width: 400px; /* Start small */
+      height: 300px;
+      position: relative;
+      margin: 20px auto;
+      overflow: hidden;
+      border-radius: 10px;
+      transition: all 0.5s ease-in-out; /* Smooth expand animation */
+      cursor: pointer;
     }
 
-    $(document).ready(function () {
-        // Click to open book effect
-        $('#cover').click(function () {
-            $(this).fadeOut(500, function () {
-                $('#book').fadeIn(500, function () {
-                    $('#book').turn({
-                        acceleration: true,
-                        pages: numberOfPages,
-                        elevation: 50,
-                        autoCenter: true,
-                        gradients: !$.isTouch,
-                        when: {
-                            turning: function (e, page, view) {
-                                var range = $(this).turn('range', page);
-                                for (page = range[0]; page <= range[1]; page++) 
-                                    addPage(page, $(this));
-                            },
-                            turned: function (e, page) {
-                                $('#page-number').val(page);
-                            }
-                        }
-                    });
-                    $('#controls').fadeIn();
-                });
-            });
-        });
+    /* Open book to full size */
+    #flipbook.open {
+      width: 800px;
+      height: 600px;
+    }
 
-        $('#number-pages').html(numberOfPages);
+    /* Hide left side when closed */
+    #flipbook.closed {
+      clip-path: inset(0 0 0 50%);
+    }
 
-        $('#page-number').keydown(function (e) {
-            if (e.keyCode == 13)
-                $('#book').turn('page', $('#page-number').val());
-        });
+    /* Ensure right page is visible */
+    #flipbook.closed .left-page {
+      display: none !important;
+    }
 
-        // Click on the left side to go back
-        $('.left-click').click(function () {
-            $('#book').turn('previous');
-        });
+    #flipbook.closed .right-page {
+      display: block !important;
+    }
 
-        // Click on the right side to go forward
-        $('.right-click').click(function () {
-            $('#book').turn('next');
-        });
+    /* Remove unwanted background and shadows */
+    .turn-page {
+      box-shadow: none !important;
+      background: none !important;
+    }
 
-        // Keyboard navigation
-        $(window).bind('keydown', function (e) {
-            if (e.target && e.target.tagName.toLowerCase() != 'input') {
-                if (e.keyCode == 37) $('#book').turn('previous');  // Left Arrow
-                else if (e.keyCode == 39) $('#book').turn('next'); // Right Arrow
+    /* Each page */
+    #flipbook img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border: none;
+    }
+
+    /* Center text */
+    h1 {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <h1>Fairus Nahiyan's Flipbook</h1>
+  </div>
+
+  <!-- Flipbook Container -->
+  <div id="flipbook">
+    <div class="right-page"><img src="images/Book1Cover.png" alt="Cover Page"></div>
+    <div class="left-page"><img src="images/Book1p1.png" alt="Page 1"></div>
+    <div class="right-page"><img src="images/Book1p2.png" alt="Page 2"></div>
+    <div class="left-page"><img src="images/Book1p3.png" alt="Page 3"></div>
+    <div class="right-page"><img src="images/Book1p4.png" alt="Page 4"></div>
+    <div class="left-page"><img src="images/Book1p3.png" alt="Page 5"></div>
+    <div class="right-page"><img src="images/Book1p2.png" alt="Page 6"></div>
+    <div class="left-page"><img src="images/Book1p1.png" alt="Page 7"></div>
+    <div class="right-page"><img src="images/Book1p2.png" alt="Page 8"></div>
+  </div>
+
+  <!-- Turn.js Initialization -->
+  <script>
+    $(document).ready(function() {
+      let isOpen = false;
+
+      // Initialize Turn.js
+      $('#flipbook').turn({
+        width: 800,
+        height: 600,
+        autoCenter: true,
+        display: 'double',
+        gradients: false, // Removes Turn.js shadows and gradients
+        acceleration: true,
+        when: {
+          start: function(event, pageObject) {
+            let totalPages = $('#flipbook').turn('pages');
+
+            if (pageObject.next === 1 || pageObject.next === totalPages) {
+              $('#flipbook').addClass('closed');
+              $('.left-page').hide();
+              $('.right-page').show();
+            } else {
+              $('#flipbook').removeClass('closed');
+              $('.left-page').show();
+              $('.right-page').show();
             }
-        });
-    });
-</script>
+          }
+        }
+      });
 
+      $('#flipbook').addClass('closed');
+
+      // Open book when clicked
+      $('#flipbook').click(function() {
+        if (!isOpen) {
+          $(this).addClass('open');
+          $('#flipbook').turn('next'); // Open to first page
+          isOpen = true;
+        } else {
+          $('#flipbook').turn('next'); // Turn pages on click
+        }
+      });
+
+      // Preload images
+      const preloadImages = [
+        "images/Book1Cover.png",
+        "images/Book1p1.png",
+        "images/Book1p2.png",
+        "images/Book1p3.png",
+        "images/Book1p4.png"
+      ];
+      preloadImages.forEach((src) => {
+        const img = new Image();
+        img.src = src;
+      });
+    });
+  </script>
 </body>
 </html>
