@@ -123,6 +123,13 @@
         duration: 1500,
         page: 2,  // Start on page 2 (open state)
         when: {
+          turning: function(event, page, view) {
+            // Prevent turning to first or last page
+            if (page === 1 || page === $(this).turn('pages')) {
+              event.preventDefault();
+              return false;
+            }
+          },
           turned: function(event, page, view) {
             // Update page numbers visibility
             if (page === 1 || page === $('#flipbook').turn('pages')) {
