@@ -14,25 +14,28 @@
   <style>
     /* Flipbook container */
     #flipbook {
-      width: 400px; /* Start small */
+      width: 400px;
       height: 300px;
       position: relative;
       margin: 20px auto;
       overflow: hidden;
       border-radius: 10px;
-      transition: all 0.5s ease-in-out; /* Smooth expand animation */
+      transform-origin: center right;  /* Set transform origin to right side */
+      transition: all 0.8s ease-in-out;  /* Smooth transition for all properties */
       cursor: pointer;
     }
 
-    /* Open book to full size */
+    /* Open book to full size with transform */
     #flipbook.open {
       width: 800px;
       height: 600px;
+      transform: translateX(-200px);  /* Shift left to keep right edge anchored */
     }
 
-    /* Hide left side when closed */
+    /* Closed state */
     #flipbook.closed {
       clip-path: inset(0 0 0 50%);
+      transform: translateX(0);
     }
 
     /* Ensure right page is visible */
@@ -93,12 +96,11 @@
         height: 600,
         autoCenter: true,
         display: 'double',
-        gradients: false, // Removes Turn.js shadows and gradients
+        gradients: false,
         acceleration: true,
         when: {
           start: function(event, pageObject) {
             let totalPages = $('#flipbook').turn('pages');
-
             if (pageObject.next === 1 || pageObject.next === totalPages) {
               $('#flipbook').addClass('closed');
               $('.left-page').hide();
@@ -114,14 +116,17 @@
 
       $('#flipbook').addClass('closed');
 
-      // Open book when clicked
+      // Modified click handler with transition
       $('#flipbook').click(function() {
         if (!isOpen) {
           $(this).addClass('open');
-          $('#flipbook').turn('next'); // Open to first page
+          // Wait for transition to complete before turning page
+          setTimeout(() => {
+            $('#flipbook').turn('next');
+          }, 800); // Match this with your transition duration
           isOpen = true;
         } else {
-          $('#flipbook').turn('next'); // Turn pages on click
+          $('#flipbook').turn('next');
         }
       });
 
