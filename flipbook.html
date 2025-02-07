@@ -194,5 +194,45 @@
       });
     });
   </script>
+
+  <!-- Add this script section right before the closing </body> tag -->
+  <script>
+    const book = document.getElementById('book');
+    let currentPage = 1;
+    const totalPages = 10; // Update this to match your total number of pages
+
+    // Function to turn page
+    function turnPage(direction) {
+        if (direction === 'next' && currentPage < totalPages) {
+            currentPage++;
+            book.src = `images/Book1p${currentPage}.png`;
+        } else if (direction === 'prev' && currentPage > 1) {
+            currentPage--;
+            book.src = `images/Book1p${currentPage}.png`;
+        }
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') {
+            turnPage('next');
+        } else if (e.key === 'ArrowLeft') {
+            turnPage('prev');
+        }
+    });
+
+    // Click navigation
+    book.addEventListener('click', (e) => {
+        const clickX = e.offsetX;
+        const bookWidth = book.offsetWidth;
+        
+        // If click is on the right half of the image
+        if (clickX > bookWidth / 2) {
+            turnPage('next');
+        } else {
+            turnPage('prev');
+        }
+    });
+  </script>
 </body>
 </html> 
