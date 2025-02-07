@@ -90,28 +90,6 @@
       height: 500px;
       object-fit: cover;
     }
-
-    .book-title {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: rgba(255,255,255,0.9);
-      color: #333;
-      padding: 20px;
-      text-align: center;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 300;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      font-size: 0.9rem;
-      transform: translateY(100%);
-      transition: transform 0.3s ease;
-    }
-
-    .book-cover:hover .book-title {
-      transform: translateY(0);
-    }
   </style>
 </head>
 <body>
@@ -125,13 +103,11 @@
     
     <div class="books-grid">
       <div class="book-cover" onclick="window.location.href='flipbook.html'">
-        <img src="images/Book1p1.png" alt="Portfolio Collection 1">
-        <div class="book-title">Spring/Summer Collection</div>
+        <img src="images/Book1Cover.png" alt="Portfolio Collection 1">
       </div>
       
       <div class="book-cover" onclick="window.location.href='flipbook2.html'">
         <img src="images/Book2Cover.png" alt="Portfolio Collection 2">
-        <div class="book-title">Fall/Winter Collection</div>
       </div>
     </div>
   </div>
