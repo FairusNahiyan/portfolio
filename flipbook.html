@@ -189,12 +189,12 @@
             }
         });
 
-        // Click navigation
-        $('#flipbook').click(function(e) {
-            const clickX = e.offsetX;
-            const bookWidth = $(this).width();
+        // Click navigation - fixed version
+        $('.page').click(function(e) {
+            const rect = this.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
             
-            if (clickX > bookWidth / 2) {
+            if (clickX > rect.width / 2) {
                 $('#flipbook').turn('next');
             } else {
                 $('#flipbook').turn('previous');
