@@ -3,44 +3,92 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Book Selection</title>
+  <title>Fairus Nahiyan - Fashion Portfolio</title>
+
+  <!-- Google Fonts - Adding Playfair Display for contrast -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
   <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f8f8f8;
+      color: #333;
+    }
+
+    .nav-header {
+      position: fixed;
+      top: 0;
+      right: 0;
+      padding: 20px 40px;
+      z-index: 100;
+    }
+
+    .designer-name {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 200;
+      font-size: 1.1rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #333;
+    }
+
     .container {
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
-      padding: 20px;
+      padding: 80px 20px 20px;
     }
 
     h1 {
-      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-size: 3.5rem;
       color: #333;
+      margin: 60px 0 10px;
+      text-align: center;
+    }
+
+    .portfolio-subtitle {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 200;
+      font-size: 1.1rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #666;
+      text-align: center;
+      margin-bottom: 80px;
     }
 
     .books-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 60px;
       padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
     .book-cover {
       position: relative;
       cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      border-radius: 5px;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 2px;
       overflow: hidden;
+      background: white;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
 
     .book-cover:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      transform: translateY(-15px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
     }
 
     .book-cover img {
       width: 100%;
-      height: 350px;
+      height: 500px;
       object-fit: cover;
-      border-radius: 5px;
     }
 
     .book-title {
@@ -48,27 +96,42 @@
       bottom: 0;
       left: 0;
       right: 0;
-      background: rgba(0,0,0,0.7);
-      color: white;
-      padding: 10px;
+      background: rgba(255,255,255,0.9);
+      color: #333;
+      padding: 20px;
       text-align: center;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+
+    .book-cover:hover .book-title {
+      transform: translateY(0);
     }
   </style>
 </head>
 <body>
+  <div class="nav-header">
+    <div class="designer-name">Fairus Nahiyan</div>
+  </div>
+
   <div class="container">
-    <h1>Select a Book to Read</h1>
+    <h1>Portfolio</h1>
+    <div class="portfolio-subtitle">Fashion Design</div>
     
     <div class="books-grid">
       <div class="book-cover" onclick="window.location.href='flipbook.html'">
-        <img src="images/Book1Cover.png" alt="Book 1">
-        <div class="book-title">Book 1</div>
+        <img src="images/Book1p1.png" alt="Portfolio Collection 1">
+        <div class="book-title">Spring/Summer Collection</div>
       </div>
       
-      <!-- Add more book covers as needed -->
       <div class="book-cover" onclick="window.location.href='flipbook2.html'">
-        <img src="images/Book2Cover.png" alt="Book 2">
-        <div class="book-title">Book 2</div>
+        <img src="images/Book2Cover.png" alt="Portfolio Collection 2">
+        <div class="book-title">Fall/Winter Collection</div>
       </div>
     </div>
   </div>
