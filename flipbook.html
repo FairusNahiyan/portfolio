@@ -1,1 +1,25 @@
-
+<script>
+    $(document).ready(function() {
+      // Initialize Turn.js
+      $('#flipbook').turn({
+        width: 800,
+        height: 600,
+        autoCenter: true,
+        display: 'double',
+        acceleration: true,
+        gradients: true,
+        elevation: 50,
+        duration: 1500,
+        pages: 9,
+        page: 2,  // Start on page 2 (open state)
+        when: {
+          // ... rest of your existing code ...
+        }
+      });
+      
+      // Remove the closed class on start
+      $('#flipbook').removeClass('closed');
+      
+      // ... rest of your existing code ...
+    });
+</script> 
