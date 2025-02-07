@@ -23,7 +23,7 @@
       top: 0;
       right: 0;
       padding: 20px 40px;
-      z-index: 100;
+      z-index: 1000;
     }
 
     .designer-name {
@@ -90,6 +90,67 @@
       height: 500px;
       object-fit: cover;
     }
+
+    .ascii-container {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: rgba(0,0,0,0.02);
+        padding: 10px 0;
+        overflow: hidden;
+    }
+
+    .ascii-art {
+        font-family: monospace;
+        white-space: pre;
+        font-size: 8px;
+        color: #666;
+        animation: moveRight 20s linear infinite;
+    }
+
+    @keyframes moveRight {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+    }
+
+    /* Make sure it doesn't interfere with main content */
+    .container {
+        margin-bottom: 60px;  /* Add space for the ASCII art */
+    }
+
+    .leopard-container {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 120px;  /* Adjust height as needed */
+        background: black;
+        overflow: hidden;
+    }
+
+    .leopard-art {
+        font-family: monospace;
+        white-space: pre;
+        font-size: 8px;
+        color: orange;
+        animation: moveRight 20s linear infinite;
+    }
+
+    @keyframes moveRight {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+    }
+
+    /* Adjust main container to not overlap with leopard */
+    .container {
+        margin-bottom: 140px;  /* Slightly more than leopard height */
+    }
+
+    /* Make sure the leopard animation is behind other elements */
+    .nav-header {
+        z-index: 1000;
+    }
   </style>
 </head>
 <body>
@@ -98,8 +159,8 @@
   </div>
 
   <div class="container">
-    <h1>Portfolio</h1>
-    <div class="portfolio-subtitle">Fashion Design</div>
+    <h1>Fairus Nahiyan</h1>
+    <div class="portfolio-subtitle">Textile Design</div>
     
     <div class="books-grid">
       <div class="book-cover" onclick="window.location.href='flipbook.html'">
@@ -111,5 +172,45 @@
       </div>
     </div>
   </div>
+
+  <div class="ascii-container">
+    <div class="ascii-art">
+        <pre class="design">
+          .,*/%&%&&%&&%%&((**,. 
+   .,(#%&&&#%%&&(%%%&&%(%#&&(###%@&%%%%#(/,
+ /%&%%&#&&(%%%@(((#&&##&@(/%&%%&&%/#%%%(#&%%
+%&&%@@#(%%%&#&&#(&(%&/*//%%/((&#/(#%#%&#%%&%#
+%&%&&%(&@##%&%(#%####(@#%&,/%/#*/(###%&/#%#(&
+        </pre>
+        <!-- Add 2-3 more variations of smaller ASCII art -->
+    </div>
+  </div>
+
+  <div class="leopard-container">
+    <div class="leopard-art">
+        <pre class="design" id="design1">
+            <!-- Copy first leopard ASCII frame here -->
+        </pre>
+        <pre class="design" id="design2">
+            <!-- Copy second leopard ASCII frame here -->
+        </pre>
+        <!-- Add more frames as needed -->
+    </div>
+  </div>
+
+  <script>
+    // Animation control
+    const designs = document.querySelectorAll('.design');
+    let currentDesignIndex = 0;
+
+    function switchDesign() {
+        designs[currentDesignIndex].style.display = 'none';
+        currentDesignIndex = (currentDesignIndex + 1) % designs.length;
+        designs[currentDesignIndex].style.display = 'block';
+    }
+
+    // Switch designs every 200ms
+    setInterval(switchDesign, 200);
+  </script>
 </body>
 </html>
