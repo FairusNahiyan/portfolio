@@ -1,6 +1,117 @@
-<script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Turn.js Interactive Flipbook</title>
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+  <!-- Turn.js -->
+  <script src="turn.js"></script>
+
+  <style>
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .book-container {
+      background: #333;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    }
+
+    #flipbook {
+      width: 800px;
+      height: 600px;
+      margin: 0 auto;
+    }
+
+    .page {
+      background-color: white;
+      overflow: hidden;
+    }
+
+    #flipbook img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .hard {
+      background: #333;
+      color: white;
+      text-align: center;
+    }
+
+    .page-number {
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+      text-align: center;
+      color: #666;
+      font-size: 12px;
+    }
+
+    .gradient {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.15) 100%);
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="book-container">
+      <div id="flipbook">
+        <!-- Cover -->
+        <div class="hard page">
+          <img src="images/Book1p1.png" alt="Cover">
+        </div>
+
+        <!-- Pages -->
+        <div class="page">
+          <img src="images/Book1p1.png" alt="Page 1">
+          <div class="page-number">1</div>
+          <div class="gradient"></div>
+        </div>
+        <div class="page">
+          <img src="images/Book1p2.png" alt="Page 2">
+          <div class="page-number">2</div>
+          <div class="gradient"></div>
+        </div>
+        <div class="page">
+          <img src="images/Book1p3.png" alt="Page 3">
+          <div class="page-number">3</div>
+          <div class="gradient"></div>
+        </div>
+        <div class="page">
+          <img src="images/Book1p4.png" alt="Page 4">
+          <div class="page-number">4</div>
+          <div class="gradient"></div>
+        </div>
+
+        <!-- Back Cover -->
+        <div class="hard page">
+          <img src="images/Book1p4.png" alt="Back Cover">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
     $(document).ready(function() {
-      // Initialize Turn.js
       $('#flipbook').turn({
         width: 800,
         height: 600,
@@ -10,16 +121,31 @@
         gradients: true,
         elevation: 50,
         duration: 1500,
-        pages: 9,
         page: 2,  // Start on page 2 (open state)
         when: {
-          // ... rest of your existing code ...
+          turned: function(event, page, view) {
+            // Update page numbers visibility
+            if (page === 1 || page === $('#flipbook').turn('pages')) {
+              $('.page-number').hide();
+            } else {
+              $('.page-number').show();
+            }
+          }
         }
       });
-      
-      // Remove the closed class on start
-      $('#flipbook').removeClass('closed');
-      
-      // ... rest of your existing code ...
+
+      // Preload images
+      const preloadImages = [
+        "images/Book1p1.png",
+        "images/Book1p2.png",
+        "images/Book1p3.png",
+        "images/Book1p4.png"
+      ];
+      preloadImages.forEach((src) => {
+        const img = new Image();
+        img.src = src;
+      });
     });
-</script> 
+  </script>
+</body>
+</html> 
