@@ -5,80 +5,72 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Turn.js Interactive Flipbook</title>
 
-  <!-- jQuery (for Turn.js 4.1.0 or older) -->
+  <!-- jQuery -->
   <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
   <!-- Turn.js -->
   <script src="turn.js"></script>
 
   <style>
-    /* Flipbook container */
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      padding: 20px;
+    }
+
     #flipbook {
       width: 800px;
       height: 600px;
-      position: relative;
-      margin: 20px auto;
-      overflow: hidden;
-      border-radius: 10px;
-      cursor: pointer;
-      transform-origin: right center;
-      transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+      margin: 0 auto;
     }
 
-    /* Closed state - scaled down and shifted */
-    #flipbook.closed {
-      transform: scale(0.5) translateX(50%);
-      clip-path: inset(0 0 0 50%);
-    }
-
-    /* Open state */
-    #flipbook.open {
-      transform: scale(1) translateX(0);
-    }
-
-    /* Ensure right page is visible in closed state */
-    #flipbook.closed .left-page {
-      display: none !important;
-    }
-
-    #flipbook.closed .right-page {
-      display: block !important;
-    }
-
-    /* Remove unwanted background and shadows */
-    .turn-page {
-      box-shadow: none !important;
-      background: none !important;
-    }
-
-    /* Each page */
     #flipbook img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+    }
+
+    .controls {
+      display: flex;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .control-btn {
+      padding: 10px 20px;
+      font-size: 16px;
       border: none;
+      border-radius: 5px;
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
     }
 
-    /* Center text */
-    h1 {
+    .control-btn:hover {
+      background-color: #45a049;
+    }
+
+    .control-btn:disabled {
+      background-color: #cccccc;
+      cursor: not-allowed;
+    }
+
+    /* Navigation hint text */
+    .nav-hints {
       text-align: center;
-    }
-
-    /* Container for centering */
-    .flipbook-container {
-      width: 100%;
-      max-width: 800px;
-      margin: 0 auto;
-      perspective: 2000px;
+      color: #666;
+      font-style: italic;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
-  <div>
+  <div class="container">
     <h1>Fairus Nahiyan's Flipbook</h1>
-  </div>
 
-  <div class="flipbook-container">
     <div id="flipbook">
       <div class="right-page"><img src="images/Book1Cover.png" alt="Cover Page"></div>
       <div class="left-page"><img src="images/Book1p1.png" alt="Page 1"></div>
@@ -90,51 +82,67 @@
       <div class="left-page"><img src="images/Book1p1.png" alt="Page 7"></div>
       <div class="right-page"><img src="images/Book1p2.png" alt="Page 8"></div>
     </div>
+
+    <div class="controls">
+      <button class="control-btn" id="prev-btn">Previous</button>
+      <button class="control-btn" id="next-btn">Next</button>
+    </div>
+
+    <div class="nav-hints">
+      Use arrow keys or click on pages to navigate • Left Arrow/Click: Previous • Right Arrow/Click: Next
+    </div>
   </div>
 
-  <!-- Turn.js Initialization -->
   <script>
     $(document).ready(function() {
-      let isOpen = false;
-
       // Initialize Turn.js
       $('#flipbook').turn({
         width: 800,
         height: 600,
         autoCenter: true,
         display: 'double',
-        gradients: false,
-        acceleration: true,
-        when: {
-          start: function(event, pageObject) {
-            let totalPages = $('#flipbook').turn('pages');
-            if (pageObject.next === 1 || pageObject.next === totalPages) {
-              $('#flipbook').addClass('closed');
-              $('.left-page').hide();
-              $('.right-page').show();
-            } else {
-              $('#flipbook').removeClass('closed');
-              $('.left-page').show();
-              $('.right-page').show();
-            }
-          }
+        gradients: true,
+        acceleration: true
+      });
+
+      // Handle button clicks
+      $('#prev-btn').click(function() {
+        $('#flipbook').turn('previous');
+      });
+
+      $('#next-btn').click(function() {
+        $('#flipbook').turn('next');
+      });
+
+      // Handle keyboard navigation
+      $(document).keydown(function(e) {
+        switch(e.keyCode) {
+          case 37: // left arrow
+            $('#flipbook').turn('previous');
+            break;
+          case 39: // right arrow
+            $('#flipbook').turn('next');
+            break;
         }
       });
 
-      $('#flipbook').addClass('closed');
-
-      // Modified click handler with transition
-      $('#flipbook').click(function() {
-        if (!isOpen) {
-          $(this).addClass('open').removeClass('closed');
-          // Wait for transform to complete before turning page
-          setTimeout(() => {
-            $('#flipbook').turn('next');
-          }, 800);
-          isOpen = true;
+      // Handle page clicks
+      $('#flipbook').on('click', function(event) {
+        const halfWidth = $(this).width() / 2;
+        const clickX = event.pageX - $(this).offset().left;
+        
+        if (clickX < halfWidth) {
+          $(this).turn('previous');
         } else {
-          $('#flipbook').turn('next');
+          $(this).turn('next');
         }
+      });
+
+      // Update button states
+      $('#flipbook').bind('turned', function(event, page) {
+        const total = $(this).turn('pages');
+        $('#prev-btn').prop('disabled', page === 1);
+        $('#next-btn').prop('disabled', page === total);
       });
 
       // Preload images
