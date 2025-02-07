@@ -1,39 +1,206 @@
-<!-- Add this script section right before the closing </body> tag -->
-<script>
-    const book = document.getElementById('book');
-    let currentPage = 1;
-    const totalPages = 10; // Update this to match your total number of pages
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Turn.js Interactive Flipbook</title>
 
-    // Function to turn page
-    function turnPage(direction) {
-        if (direction === 'next' && currentPage < totalPages) {
-            currentPage++;
-            book.src = `images/Book2p${currentPage}.png`;
-        } else if (direction === 'prev' && currentPage > 1) {
-            currentPage--;
-            book.src = `images/Book2p${currentPage}.png`;
-        }
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+  <!-- Turn.js -->
+  <script src="turn.js"></script>
+
+  <!-- Add Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      padding: 20px;
     }
 
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowRight') {
-            turnPage('next');
-        } else if (e.key === 'ArrowLeft') {
-            turnPage('prev');
-        }
-    });
+    .book-container {
+      background: #333;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    }
 
-    // Click navigation
-    book.addEventListener('click', (e) => {
-        const clickX = e.offsetX;
-        const bookWidth = book.offsetWidth;
-        
-        // If click is on the right half of the image
-        if (clickX > bookWidth / 2) {
-            turnPage('next');
-        } else {
-            turnPage('prev');
+    #flipbook {
+      width: 800px;
+      height: 600px;
+      margin: 0 auto;
+    }
+
+    .page {
+      background-color: white;
+      overflow: hidden;
+    }
+
+    #flipbook img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .hard {
+      background: #333;
+      color: white;
+      text-align: center;
+    }
+
+    .page-number {
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+      text-align: center;
+      color: #666;
+      font-size: 12px;
+    }
+
+    .gradient {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.15) 100%);
+      pointer-events: none;
+    }
+
+    h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;  /* Light weight for elegance */
+      font-size: 2.5rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #333;
+      margin: 40px 0;
+      position: relative;
+    }
+
+    h1:after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 2px;
+      background-color: #333;
+    }
+
+    /* Optional subtitle styling */
+    .portfolio-subtitle {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      font-size: 1rem;
+      color: #666;
+      text-align: center;
+      margin-top: -30px;
+      margin-bottom: 40px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Modern Day Pinstar</h1>
+    <div class="portfolio-subtitle">by Fairus Nahiyan</div>
+    <div class="book-container">
+      <div id="flipbook">
+        <!-- Cover -->
+
+        <!-- Pages -->
+        <div class="page">
+          <img src="images/Book1p1.png" alt="Page 1">
+          <div class="page-number">1</div>
+          <div class="gradient"></div>
+        </div>
+        <div class="page">
+          <img src="images/Book1p2.png" alt="Page 2">
+          <div class="page-number">2</div>
+          <div class="gradient"></div>
+        </div>
+        <div class="page">
+          <img src="images/Book1p3.png" alt="Page 3">
+          <div class="page-number">3</div>
+          <div class="gradient"></div>
+        </div>
+        <div class="page">
+          <img src="images/Book1p4.png" alt="Page 4">
+          <div class="page-number">4</div>
+          <div class="gradient"></div>
+        </div>
+
+        <!-- Back Cover -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    $(document).ready(function() {
+      $('#flipbook').turn({
+        width: 800,
+        height: 600,
+        autoCenter: true,
+        display: 'double',
+        acceleration: true,
+        gradients: true,
+        elevation: 50,
+        duration: 1500,
+        when: {
+          turning: function(event, page, view) {
+          },
+          turned: function(event, page, view) {
+          }
         }
+      });
+
+      // Preload images
+      const preloadImages = [
+        "images/Book1p1.png",
+        "images/Book1p2.png",
+        "images/Book1p3.png",
+        "images/Book1p4.png"
+      ];
+      preloadImages.forEach((src) => {
+        const img = new Image();
+        img.src = src;
+      });
     });
-</script> 
+  </script>
+
+  <!-- Add this script section right before the closing </body> tag -->
+  <script>
+    $(document).ready(function() {
+        // Keyboard navigation
+        $(document).keydown(function(e) {
+            if (e.keyCode == 37) { // Left arrow
+                $('#flipbook').turn('previous');
+            } else if (e.keyCode == 39) { // Right arrow
+                $('#flipbook').turn('next');
+            }
+        });
+
+        // Click navigation
+        $('#flipbook').click(function(e) {
+            const clickX = e.offsetX;
+            const bookWidth = $(this).width();
+            
+            if (clickX > bookWidth / 2) {
+                $('#flipbook').turn('next');
+            } else {
+                $('#flipbook').turn('previous');
+            }
+        });
+    });
+  </script>
+</body>
+</html> 
