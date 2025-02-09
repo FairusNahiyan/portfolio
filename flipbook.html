@@ -14,7 +14,8 @@
   <!-- Add Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
     .container {
@@ -30,6 +31,7 @@
       padding: 20px;
       border-radius: 5px;
       box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      position: relative;
     }
 
     #flipbook {
@@ -163,37 +165,91 @@
     .container {
       margin-top: 80px;
     }
+
+    .text-page {
+        background-color: #f5f5f5;
+        color: #333;
+        font-family: 'Montserrat', sans-serif;
+        width: 100%;
+        height: 100%;
+        position: relative;
+        padding: 25px 30px 30px 30px;  /* Reduced side padding from 40px to 30px */
+        box-sizing: border-box;
+        margin: 0;
+    }
+
+    .text-page::after {
+        content: '';
+        position: absolute;
+        top: 20px;
+        right: 20px;          /* Reduced from 30px to 20px */
+        bottom: 20px;         /* Reduced from 30px to 20px */
+        left: 20px;           /* Reduced from 30px to 20px */
+        border: 1px solid #333;
+        pointer-events: none;
+    }
+
+    .text-page h2 {
+        font-family: 'Cinzel', serif;  /* Back to original elegant font */
+        font-size: 16px;
+        margin-bottom: 12px;
+        font-weight: 500;
+        position: relative;
+        text-align: center;
+        letter-spacing: 0.8px;
+    }
+
+    .text-page p {
+        font-family: 'Crimson Text', serif;  /* Back to original text font */
+        font-size: 13px;
+        line-height: 1.5;
+        margin-bottom: 12px;
+        position: relative;
+        text-align: justify;
+        font-weight: 400;
+        letter-spacing: 0.2px;
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Modern Day Frieze</h1>
+    <h1>RUSTED</h1>
     <div class="portfolio-subtitle">by Fairus Nahiyan</div>
     <div class="book-container">
       <div id="flipbook">
-        <!-- Cover -->
-        <div class="hard">Front Cover</div>
-        
-        <!-- Text pages -->
+        <!-- Text pages (first page acts as cover) -->
         <div class="page">
           <div class="text-page">
-            <h2>Modern Day Frieze</h2>
-            <p>A Collection of Contemporary Textile Designs</p>
-            <p>This portfolio showcases a series of innovative textile patterns inspired by modern architectural elements and geometric forms. Each design represents a fusion of traditional craftsmanship with contemporary aesthetics.</p>
+            <h2>Rusted: A Textile Exploration of Decay and Resilience</h2>
+            <p>Returning to my home country, Bangladesh, is always an emotional experience. However, this time, it opened my eyes to the harsh realities that many endure daily. Witnessing extreme cruelty, poverty, and the neglect of authority figures left a profound impact on me. The lack of basic necessities and the struggles of the elderly forced to endure hardship without support highlighted the injustices faced by many. These experiences shaped my perspective and deeply influenced my collection, Rusted.</p>
+
+            <p>In today's fast-paced world, people are consumed by their struggles, rarely taking a moment to acknowledge the suffering around them. The mistreatment of vulnerable individuals whether due to age, social status, or circumstance compelled me to reflect on my own future. As I approach another year of my life, I wonder: will this be my fate as well? Will society continue to devalue those who have given so much? Overwhelmed by these thoughts, I felt an urgent need to transform these emotions into art.</p>
+
+            <p>Rusted draws inspiration from overlooked beauty in decay, reflecting the pain of those whose worth has been forgotten. The rusted textures symbolize the erosion of empathy and the hardness that has settled in human hearts. This collection explores</p>
           </div>
         </div>
         <div class="page">
           <div class="text-page">
-            <h2>Design Process</h2>
-            <p>The designs in this collection were developed through a combination of digital and traditional techniques. Starting with hand-drawn sketches, each pattern was refined and digitally enhanced to create seamless, repeatable patterns suitable for textile production.</p>
-            <p>Materials and techniques were carefully selected to maintain the integrity of the original designs while ensuring practical application in modern textile manufacturing.</p>
+            <p>themes of neglect, abandonment, and the strength it takes to endure in a world that often overlooks the suffering of others.</p>
+            
+            <p>Love, once a pure and simple concept, has been distorted in today's society. People use the word freely, yet it's true essence is lost. My designs reflect this shift, incorporating elements that represent pain, resilience, and the raw emotions hidden beneath the surface. Through my work, I aim to provoke thought, encouraging viewers to confront the realities we often choose to ignore.</p>
+
+            <p>As an artist, I challenged myself to step beyond my comfort zone. While heat transfer has always been a familiar technique, I pushed myself to explore alternative screen-printing methods. By incorporating tissue paper and layering materials, I created unique textures that capture the essence of rust and deterioration.</p>
+
+            <p>The color palette for Rusted plays a crucial role in conveying its message. I selected contrasting shades to symbolize the duality of destruction and beauty. Dark hues dominate the collection, representing the weight of human suffering and the struggles endured in search of happiness. Yet, amidst the darkness, there is resilience evidence that even in decay, something meaningful can emerge.</p>
+          
+            <p>This collection is more than just textiles; it is a call for awareness. By bringing attention to the pain of</p>         
           </div>
         </div>
         <div class="page">
           <div class="text-page">
-            <h2>Pattern Development</h2>
-            <p>Each pattern in this collection explores the relationship between space, form, and texture. The designs draw inspiration from architectural friezes, modernist patterns, and geometric abstractions found in contemporary urban environments.</p>
-            <p>The following pages demonstrate the evolution of these concepts into finished textile designs.</p>
+            <p>neglect, love lost, and societal indifference, Rusted urges us to rethink the way we perceive aging, abandonment, and human worth. Each of the eight prints in this collection tells a part of a greater story, centered around one central theme.</p>
+
+            <p>One of the key prints features rusted locks and needles layered with intricate textures to emphasize decay. The two locks symbolize closed minds and emotional barriers that prevent compassion. Another print incorporates seashells, once homes to life, now rusted and forgotten echoing the way people disregard aging individuals despite their past vibrancy.</p>
+
+            <p>An abandoned house with distressed textures serves as a direct representation of the old-age home I visited in Bangladesh, a place that left an indelible mark on my heart. A rusted motorbike, its wheels crumbling, connects to the house, symbolizing the passage of time and the inevitability of neglect. Finally, angel wings at the top of the composition transition from light to dark, representing the fading purity of humanity in an increasingly indifferent world.</p>
+
+            <p>This project serves as a testament to resilience, shedding light on the struggles of those who have been overlooked and forgotten. Through this project, I hope to inspire awareness, evoke emotion, and challenge perceptions, ensuring that the beauty in resilience is never overlooked.</p>
           </div>
         </div>
 
@@ -225,9 +281,8 @@
         <div class="page"><img src="book1/page28.jpg" alt="Page 28"></div>
         <div class="page"><img src="book1/page29.PNG" alt="Page 29"></div>
         <div class="page"><img src="book1/page30.PNG" alt="Page 30"></div>
-        
-        <!-- Back Cover -->
-        <div class="hard">Back Cover</div>
+        <div class="page">
+        </div>
       </div>
     </div>
   </div>
