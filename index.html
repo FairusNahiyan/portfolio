@@ -109,23 +109,11 @@
       opacity: 0.95;
     }
 
-    /* Special positioning for books */
-    .book-cover:nth-child(1) { transform: translateY(20px); }
-    .book-cover:nth-child(2) { transform: translateY(-20px); }
-    .book-cover:nth-child(3) { transform: translateY(30px); }
-    .book-cover:nth-child(4) { transform: translateY(-10px); }
-    .book-cover:nth-child(5) { transform: translateY(15px); }
-    .book-cover:nth-child(6) { transform: translateY(-25px); }
-    .book-cover:nth-child(7) { transform: translateY(10px); margin: 0 auto; grid-column: 2; }
-
-    /* Hover states should move up from their current position */
-    .book-cover:nth-child(1):hover { transform: translateY(5px); }
-    .book-cover:nth-child(2):hover { transform: translateY(-35px); }
-    .book-cover:nth-child(3):hover { transform: translateY(15px); }
-    .book-cover:nth-child(4):hover { transform: translateY(-25px); }
-    .book-cover:nth-child(5):hover { transform: translateY(0px); }
-    .book-cover:nth-child(6):hover { transform: translateY(-40px); }
-    .book-cover:nth-child(7):hover { transform: translateY(-5px); }
+    /* Center the last book in the grid */
+    .book-cover:nth-child(7) {
+      margin: 0 auto;
+      grid-column: 2;
+    }
 
     @media (max-width: 1400px) {
       .books-grid {
