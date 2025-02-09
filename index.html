@@ -76,9 +76,9 @@
     .books-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 40px;
-      padding: 40px;
-      max-width: 1200px;
+      gap: 80px;
+      padding: 60px;
+      max-width: 1400px;
       margin: 0 auto;
       position: relative;
     }
@@ -127,10 +127,11 @@
     .book-cover:nth-child(6):hover { transform: translateY(-40px); }
     .book-cover:nth-child(7):hover { transform: translateY(-5px); }
 
-    @media (max-width: 1200px) {
+    @media (max-width: 1400px) {
       .books-grid {
         grid-template-columns: repeat(2, 1fr);
-        max-width: 800px;
+        max-width: 1000px;
+        gap: 60px;
       }
       .book-cover:nth-child(7) { grid-column: 1 / -1; }
     }
@@ -138,8 +139,9 @@
     @media (max-width: 768px) {
       .books-grid {
         grid-template-columns: 1fr;
-        padding: 20px;
+        padding: 30px;
         max-width: 315px;
+        gap: 50px;
       }
       .book-cover:nth-child(7) { grid-column: auto; }
     }
