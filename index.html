@@ -75,10 +75,10 @@
     /* Portfolio Grid */
     .books-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));  /* Slightly wider to accommodate A4 */
+      grid-template-columns: repeat(auto-fit, minmax(315px, 1fr));  /* Reduced from 420px to 315px (25% smaller) */
       gap: 60px;
       padding: 20px;
-      max-width: 1200px;
+      max-width: 900px;  /* Reduced from 1200px to 900px */
       margin: 0 auto;
     }
 
@@ -90,8 +90,10 @@
       overflow: hidden;
       background: #252525;
       box-shadow: 0 5px 20px rgba(0,0,0,0.4);
-      aspect-ratio: 1/1.4142;  /* A4 ratio */
+      aspect-ratio: 1/1.4142;  /* Keep A4 ratio */
       width: 100%;
+      max-width: 315px;  /* Added max-width to ensure consistent size */
+      margin: 0 auto;  /* Center the book covers */
     }
 
     .book-cover:hover {
@@ -115,7 +117,7 @@
       .books-grid {
         grid-template-columns: 1fr;
         padding: 10px;
-        max-width: 420px;  /* Limit width on mobile */
+        max-width: 315px;  /* Reduced from 420px to 315px */
         margin: 0 auto;
       }
 
