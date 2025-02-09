@@ -43,7 +43,7 @@
       overflow: hidden;
     }
 
-    #flipbook img {
+    #flipbook img, #flipbook embed {
       width: 100%;
       height: 100%;
       object-fit: contain;
@@ -107,6 +107,47 @@
       margin-top: -30px;
       margin-bottom: 40px;
     }
+
+    .text-page {
+        background-color: #f5f5f5;
+        padding: 40px;
+        color: #333;
+        font-family: 'Montserrat', sans-serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        position: relative;
+    }
+
+    .text-page:after {
+        content: '';
+        position: absolute;
+        top: 40px;
+        right: 40px;
+        bottom: 40px;
+        left: 40px;
+        border: 1px solid #333;
+        pointer-events: none;
+    }
+
+    .text-page h2, .text-page p {
+        position: relative;
+        z-index: 1;
+    }
+
+    .text-page h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        font-weight: 400;
+    }
+
+    .text-page p {
+        font-size: 16px;
+        line-height: 1.6;
+        margin: 0 auto;
+        max-width: 80%;
+    }
   </style>
 </head>
 <body>
@@ -117,16 +158,18 @@
       <div id="flipbook">
         <!-- Cover -->
 
-        <!-- Pages -->
+        <!-- Pages - mix of images and text -->
         <div class="page">
           <img src="book2/page1.jpg" alt="Page 1">
           <div class="page-number">1</div>
           <div class="gradient"></div>
         </div>
         <div class="page">
-          <img src="book2/page2.jpg" alt="Page 2">
+          <div class="text-page">
+            <h2>Design Philosophy</h2>
+            <p>This collection explores the intersection of traditional patterns and modern aesthetics, creating a unique visual language that bridges past and present.</p>
+          </div>
           <div class="page-number">2</div>
-          <div class="gradient"></div>
         </div>
         <div class="page">
           <img src="book2/page3.jpg" alt="Page 3">
@@ -134,13 +177,39 @@
           <div class="gradient"></div>
         </div>
         <div class="page">
-          <img src="book2/page4.jpg" alt="Page 4">
+          <div class="text-page">
+            <h2>Inspiration</h2>
+            <p>Drawing from natural forms and geometric patterns, these designs reflect the harmony found in both structured and organic elements.</p>
+          </div>
           <div class="page-number">4</div>
-          <div class="gradient"></div>
         </div>
         <div class="page">
           <img src="book2/page5.jpg" alt="Page 5">
           <div class="page-number">5</div>
+          <div class="gradient"></div>
+        </div>
+        <div class="page">
+          <div class="text-page">
+            <h2>Process</h2>
+            <p>Each design begins with careful consideration of space and movement, developing through multiple iterations to achieve the perfect balance.</p>
+          </div>
+          <div class="page-number">6</div>
+        </div>
+        <div class="page">
+          <img src="book2/page7.jpg" alt="Page 7">
+          <div class="page-number">7</div>
+          <div class="gradient"></div>
+        </div>
+        <div class="page">
+          <div class="text-page">
+            <h2>Vision</h2>
+            <p>These patterns aim to create spaces that feel both contemporary and timeless, where every element serves both aesthetic and emotional purpose.</p>
+          </div>
+          <div class="page-number">8</div>
+        </div>
+        <div class="page">
+          <img src="book2/page9.jpg" alt="Page 9">
+          <div class="page-number">9</div>
           <div class="gradient"></div>
         </div>
 
@@ -174,7 +243,11 @@
         "book2/page2.jpg",
         "book2/page3.jpg",
         "book2/page4.jpg",
-        "book2/page5.jpg"
+        "book2/page5.jpg",
+        "book2/page6.jpg",
+        "book2/page7.jpg",
+        "book2/page8.jpg",
+        "book2/page9.jpg"
       ];
       preloadImages.forEach((src) => {
         const img = new Image();
