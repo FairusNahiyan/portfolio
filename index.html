@@ -86,26 +86,72 @@
       position: relative;
       cursor: pointer;
       transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-      border-radius: 8px;
+      border-radius: 4px;
       overflow: hidden;
       background: #252525;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.4);
-      aspect-ratio: 1/1.4142;  /* Keep A4 ratio */
+      box-shadow: 
+        -5px 5px 15px rgba(0,0,0,0.3),
+        5px 5px 15px rgba(0,0,0,0.3),
+        0 8px 15px rgba(0,0,0,0.4);
+      aspect-ratio: 1/1.4142;
       width: 100%;
-      max-width: 315px;  /* Added max-width to ensure consistent size */
-      margin: 0 auto;  /* Center the book covers */
+      max-width: 315px;
+      margin: 0 auto;
+      transform: perspective(1000px) rotateY(3deg);
+      transform-style: preserve-3d;
+    }
+
+    .book-cover::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 30px;
+      height: 100%;
+      background: rgba(0,0,0,0.2);
+      transform: skewY(-45deg);
+      transform-origin: 0 100%;
+    }
+
+    .book-cover::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 3px;
+      background: rgba(0,0,0,0.1);
+      transform: skewX(45deg);
+      transform-origin: 0 100%;
     }
 
     .book-cover:hover {
-      transform: translateY(-15px);
-      box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+      transform: perspective(1000px) rotateY(10deg) translateY(-15px);
+      box-shadow: 
+        -15px 5px 20px rgba(0,0,0,0.3),
+        15px 5px 20px rgba(0,0,0,0.3),
+        0 8px 15px rgba(0,0,0,0.4);
     }
 
     .book-cover img {
       width: 100%;
-      height: 100%;  /* Changed from fixed height */
-      object-fit: contain;
+      height: 100%;
+      object-fit: cover;
       opacity: 0.95;
+      transform: translateZ(0);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    /* Add subtle spine effect */
+    .book-spine {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 20px;
+      height: 100%;
+      background: rgba(0,0,0,0.15);
+      transform-origin: 100% 0;
+      transform: skewY(-45deg);
     }
 
     /* Responsive Design */
@@ -138,10 +184,12 @@
     
     <div class="books-grid">
       <div class="book-cover" onclick="window.location.href='flipbook.html'">
+        <div class="book-spine"></div>
         <img src="images/Book1Cover.png" alt="Portfolio Collection 1">
       </div>
       
       <div class="book-cover" onclick="window.location.href='flipbook2.html'">
+        <div class="book-spine"></div>
         <img src="images/Book2Cover.png" alt="Portfolio Collection 2">
       </div>
     </div>
