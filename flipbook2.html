@@ -23,7 +23,6 @@
       align-items: center;
       gap: 20px;
       padding: 20px;
-      padding-top: 80px;
     }
 
     .book-container {
@@ -197,47 +196,9 @@
     .next-button {
         right: -60px;
     }
-
-    /* Add navbar styles */
-    .navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background: rgba(255, 255, 255, 0.95);
-      padding: 20px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      z-index: 1000;
-    }
-
-    .nav-links {
-      max-width: 1200px;
-      margin: 0 auto;
-      text-align: right;
-    }
-
-    .nav-links a {
-      color: #333;
-      text-decoration: none;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 400;
-      margin-left: 30px;
-      font-size: 16px;
-      transition: color 0.3s ease;
-    }
-
-    .nav-links a:hover {
-      color: #666;
-    }
   </style>
 </head>
 <body>
-  <nav class="navbar">
-    <div class="nav-links">
-      <a href="index.html#books">All Work</a>
-      <a href="about.html">About Me</a>
-    </div>
-  </nav>
   <div class="container">
     <h1>THE HUNTER COLLECTION</h1>
     <div class="portfolio-subtitle">by Fairus Nahiyan</div>
@@ -313,13 +274,15 @@
 
       // Preload images
       const preloadImages = [
-        "book2/page3.PNG",
-        "book2/page4.PNG",
-        "book2/page5.PNG",
+        "book2/page1.jpg",
+        "book2/page2.jpg",
+        "book2/page3.jpg",
+        "book2/page4.jpg",
+        "book2/page5.jpg",
         "book2/page6.jpg",
-        "book2/page7.png",
-        "book2/page8.PNG",
-        "book2/page9.PNG"
+        "book2/page7.jpg",
+        "book2/page8.jpg",
+        "book2/page9.jpg"
       ];
       preloadImages.forEach((src) => {
         const img = new Image();
