@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio Book 5</title>
+  <title>Divine Stitches</title>
 
   <!-- jQuery -->
   <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
@@ -15,6 +15,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- Add the Cinzel and Crimson Text fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
     .container {
@@ -30,6 +33,7 @@
       padding: 20px;
       border-radius: 5px;
       box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      position: relative;
     }
 
     #flipbook {
@@ -107,44 +111,145 @@
       margin-top: -30px;
       margin-bottom: 40px;
     }
+
+    .book-binding {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(
+        to right,
+        rgba(0,0,0,0.1) 0%,
+        rgba(0,0,0,0.2) 50%,
+        rgba(0,0,0,0.1) 100%
+      );
+      z-index: 1000;
+      pointer-events: none;
+    }
+
+    .text-page {
+      background-color: #f5f5f5;
+      color: #333;
+      font-family: 'Montserrat', sans-serif;
+      width: 100%;
+      height: 100%;
+      position: relative;
+      padding: 25px 30px 30px 30px;
+      box-sizing: border-box;
+      margin: 0;
+    }
+
+    .text-page::after {
+      content: '';
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      bottom: 20px;
+      left: 20px;
+      border: 1px solid #333;
+      pointer-events: none;
+    }
+
+    .text-page h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 16px;
+      margin-bottom: 12px;
+      font-weight: 500;
+      position: relative;
+      text-align: center;
+      letter-spacing: 0.8px;
+    }
+
+    .text-page p {
+      font-family: 'Crimson Text', serif;
+      font-size: 13px;
+      line-height: 1.5;
+      margin-bottom: 12px;
+      position: relative;
+      text-align: justify;
+      font-weight: 400;
+      letter-spacing: 0.2px;
+    }
+
+    /* Navigation buttons */
+    .nav-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      padding: 15px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 18px;
+      transition: background 0.3s ease;
+      z-index: 1000;
+    }
+
+    .nav-button:hover {
+      background: rgba(0, 0, 0, 0.8);
+    }
+
+    .prev-button {
+      left: -60px;
+    }
+
+    .next-button {
+      right: -60px;
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Modern Day Frieze</h1>
+    <h1>DIVINE STITCHES</h1>
     <div class="portfolio-subtitle">by Fairus Nahiyan</div>
     <div class="book-container">
+      <button class="nav-button prev-button">←</button>
+      <button class="nav-button next-button">→</button>
+      <div class="book-binding"></div>
       <div id="flipbook">
-        <!-- Cover -->
+        <!-- First two pages reserved for text -->
+        <div class="page">
+          <div class="text-page">
+            <h2>Divine Stitches: Elegance of Sacred Spaces</h2>
+            <br>
+            <p>Divine Stitches is a textile collection that draws inspiration from the architectural splendor and spiritual serenity of mosque interiors. Designed using CAD (Computer-Aided Design), this collection transforms intricate geometric patterns, arabesque motifs, and sacred calligraphy into contemporary textile prints, paying homage to the timeless beauty of Islamic artistry.</p>
 
-        <!-- Pages -->
-        <div class="page">
-          <img src="book5/page1.jpg" alt="Page 1">
-          <div class="page-number">1</div>
-          <div class="gradient"></div>
+            <p>The collection captures the symmetrical perfection of mosque architecture, where every detail is crafted with purpose and devotion. Using CAD, I have meticulously recreated the ornamental tile work, interlacing arches, and domed ceilings, ensuring precision and fluidity in every design. Repetitive patterns reflect the rhythmic harmony of prayer, while layered compositions symbolize depth and spiritual transcendence.</p>
+
+            <p>Every element in this collection is digitally engineered to maintain the delicate balance between tradition and innovation. The precision of CAD allows for seamless tessellations, intricate detailing, and a modern reinterpretation of historic craftsmanship. The play of light and shadow within mosque interiors is mirrored through subtle gradients and fine line work, evoking the ethereal atmosphere of these sacred spaces.</p>
+          </div>
         </div>
         <div class="page">
-          <img src="book5/page2.jpg" alt="Page 2">
-          <div class="page-number">2</div>
-          <div class="gradient"></div>
-        </div>
-        <div class="page">
-          <img src="book5/page3.jpg" alt="Page 3">
-          <div class="page-number">3</div>
-          <div class="gradient"></div>
-        </div>
-        <div class="page">
-          <img src="book5/page4.jpg" alt="Page 4">
-          <div class="page-number">4</div>
-          <div class="gradient"></div>
-        </div>
-        <div class="page">
-          <img src="book5/page5.jpg" alt="Page 5">
-          <div class="page-number">5</div>
-          <div class="gradient"></div>
+          <div class="text-page">
+            <p>Divine Stitches is more than a textile exploration it is a fusion of faith, history, and technology. By translating the elegance of sacred spaces into textile art through CAD, this collection bridges the past and present, offering a contemporary take on the timeless beauty of mosque interiors.</p>
+          </div>
         </div>
 
-        <!-- Back Cover -->
+        <!-- Book images with correct extensions -->
+        <div class="page"><img src="book5/page3.png" alt="Page 3"></div>
+        <div class="page"><img src="book5/page4.tif" alt="Page 4"></div>
+        <div class="page"><img src="book5/page5.PNG" alt="Page 5"></div>
+        <div class="page"><img src="book5/page6.jpg" alt="Page 6"></div>
+        <div class="page"><img src="book5/page7.tif" alt="Page 7"></div>
+        <div class="page"><img src="book5/page8.PNG" alt="Page 8"></div>
+        <div class="page"><img src="book5/page9.jpg" alt="Page 9"></div>
+        <div class="page"><img src="book5/page10.jpg" alt="Page 10"></div>
+        <div class="page"><img src="book5/page11.PNG" alt="Page 11"></div>
+        <div class="page"><img src="book5/page12.jpg" alt="Page 12"></div>
+        <div class="page"><img src="book5/page13.png" alt="Page 13"></div>
+        <div class="page"><img src="book5/page14PNG.PNG" alt="Page 14"></div>
+        <div class="page"><img src="book5/page15.jpg" alt="Page 15"></div>
+        <div class="page"><img src="book5/page16.png" alt="Page 16"></div>
+        <div class="page"><img src="book5/page17.PNG" alt="Page 17"></div>
+        <div class="page"><img src="book5/page18.jpg" alt="Page 18"></div>
+        <div class="page"><img src="book5/page19.png" alt="Page 19"></div>
+        <div class="page"><img src="book5/page20.PNG" alt="Page 20"></div>
+        <div class="page"><img src="book5/page21.jpg" alt="Page 21"></div>
+        <div class="page"><img src="book5/page22.PNG" alt="Page 22"></div>
+        <div class="page"><img src="book5/page23.PNG" alt="Page 23"></div>
       </div>
     </div>
   </div>
@@ -162,8 +267,12 @@
         duration: 1500,
         when: {
           turning: function(event, page, view) {
+            // Hide binding when page starts turning
+            $('.book-binding').fadeOut(200);
           },
           turned: function(event, page, view) {
+            // Show binding after page turn completes
+            $('.book-binding').fadeIn(200);
           }
         }
       });
@@ -186,16 +295,16 @@
   <!-- Add this script section right before the closing </body> tag -->
   <script>
     $(document).ready(function() {
-        // Keyboard navigation
-        $(document).keydown(function(e) {
-            if (e.keyCode == 37) { // Left arrow
-                $('#flipbook').turn('previous');
-            } else if (e.keyCode == 39) { // Right arrow
-                $('#flipbook').turn('next');
-            }
+        // Button navigation
+        $('.prev-button').click(function() {
+            $('#flipbook').turn('previous');
         });
 
-        // Click navigation - fixed version
+        $('.next-button').click(function() {
+            $('#flipbook').turn('next');
+        });
+
+        // Click navigation on pages
         $('.page').click(function(e) {
             const rect = this.getBoundingClientRect();
             const clickX = e.clientX - rect.left;
@@ -204,6 +313,15 @@
                 $('#flipbook').turn('next');
             } else {
                 $('#flipbook').turn('previous');
+            }
+        });
+
+        // Keyboard navigation
+        $(document).keydown(function(e) {
+            if (e.keyCode == 37) { // Left arrow
+                $('#flipbook').turn('previous');
+            } else if (e.keyCode == 39) { // Right arrow
+                $('#flipbook').turn('next');
             }
         });
     });

@@ -16,6 +16,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 
+  <!-- Add Google Font for cursive text -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600&display=swap" rel="stylesheet">
+
   <style>
     .container {
       display: flex;
@@ -30,6 +33,7 @@
       padding: 20px;
       border-radius: 5px;
       box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      position: relative;
     }
 
     #flipbook {
@@ -107,6 +111,66 @@
       margin-top: -30px;
       margin-bottom: 40px;
     }
+
+    /* Navigation buttons */
+    .nav-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      padding: 15px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 18px;
+      transition: background 0.3s ease;
+      z-index: 1000;
+    }
+
+    .nav-button:hover {
+      background: rgba(0, 0, 0, 0.8);
+    }
+
+    .prev-button {
+      left: -60px;
+    }
+
+    .next-button {
+      right: -60px;
+    }
+
+    .text-page {
+      background-color: #f5f5f5;
+      color: #333;
+      width: 100%;
+      height: 100%;
+      position: relative;
+      padding: 25px 30px 30px 30px;
+      box-sizing: border-box;
+      margin: 0;
+    }
+
+    .text-page::after {
+      content: '';
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      bottom: 20px;
+      left: 20px;
+      border: 1px solid #333;
+      pointer-events: none;
+    }
+
+    .text-page p {
+      font-family: 'Dancing Script', cursive;
+      font-size: 16px;
+      line-height: 1.8;
+      margin-bottom: 12px;
+      position: relative;
+      text-align: justify;
+      font-weight: 400;
+    }
   </style>
 </head>
 <body>
@@ -114,37 +178,21 @@
     <h1>Modern Day Frieze</h1>
     <div class="portfolio-subtitle">by Fairus Nahiyan</div>
     <div class="book-container">
+      <button class="nav-button prev-button">←</button>
+      <button class="nav-button next-button">→</button>
+      <div class="book-binding"></div>
       <div id="flipbook">
-        <!-- Cover -->
-
-        <!-- Pages -->
+        <!-- Text page -->
         <div class="page">
-          <img src="book7/page1.jpg" alt="Page 1">
-          <div class="page-number">1</div>
-          <div class="gradient"></div>
+          <div class="text-page">
+            <p>Oil painting is more than just an art form for me—it's a therapeutic process that allows me to express emotions and relive cherished memories. I often paint scenes from my hometown, as it holds a special place in my heart. The landscapes, streets, and familiar places bring back the best moments of my life, making each brushstroke a journey through time. The richness of oil paints helps me capture the warmth and nostalgia I feel, turning my canvas into a reflection of my deepest connections.</p>
+          </div>
         </div>
-        <div class="page">
-          <img src="book7/page2.jpg" alt="Page 2">
-          <div class="page-number">2</div>
-          <div class="gradient"></div>
-        </div>
-        <div class="page">
-          <img src="book7/page3.jpg" alt="Page 3">
-          <div class="page-number">3</div>
-          <div class="gradient"></div>
-        </div>
-        <div class="page">
-          <img src="book7/page4.jpg" alt="Page 4">
-          <div class="page-number">4</div>
-          <div class="gradient"></div>
-        </div>
-        <div class="page">
-          <img src="book7/page5.jpg" alt="Page 5">
-          <div class="page-number">5</div>
-          <div class="gradient"></div>
-        </div>
-
-        <!-- Back Cover -->
+        <!-- Book images with correct extensions -->
+        <div class="page"><img src="book7/page1.jpg" alt="Page 1"></div>
+        <div class="page"><img src="book7/page2.jpg" alt="Page 2"></div>
+        <div class="page"><img src="book7/page3.jpg" alt="Page 3"></div>
+        <div class="page"><img src="book7/page4.jpg" alt="Page 4"></div>
       </div>
     </div>
   </div>
@@ -162,8 +210,12 @@
         duration: 1500,
         when: {
           turning: function(event, page, view) {
+            // Hide binding when page starts turning
+            $('.book-binding').fadeOut(200);
           },
           turned: function(event, page, view) {
+            // Show binding after page turn completes
+            $('.book-binding').fadeIn(200);
           }
         }
       });
@@ -173,8 +225,7 @@
         "book7/page1.jpg",
         "book7/page2.jpg",
         "book7/page3.jpg",
-        "book7/page4.jpg",
-        "book7/page5.jpg"
+        "book7/page4.jpg"
       ];
       preloadImages.forEach((src) => {
         const img = new Image();
@@ -186,16 +237,16 @@
   <!-- Add this script section right before the closing </body> tag -->
   <script>
     $(document).ready(function() {
-        // Keyboard navigation
-        $(document).keydown(function(e) {
-            if (e.keyCode == 37) { // Left arrow
-                $('#flipbook').turn('previous');
-            } else if (e.keyCode == 39) { // Right arrow
-                $('#flipbook').turn('next');
-            }
+        // Button navigation
+        $('.prev-button').click(function() {
+            $('#flipbook').turn('previous');
         });
 
-        // Click navigation - fixed version
+        $('.next-button').click(function() {
+            $('#flipbook').turn('next');
+        });
+
+        // Click navigation on pages
         $('.page').click(function(e) {
             const rect = this.getBoundingClientRect();
             const clickX = e.clientX - rect.left;
@@ -204,6 +255,15 @@
                 $('#flipbook').turn('next');
             } else {
                 $('#flipbook').turn('previous');
+            }
+        });
+
+        // Keyboard navigation
+        $(document).keydown(function(e) {
+            if (e.keyCode == 37) { // Left arrow
+                $('#flipbook').turn('previous');
+            } else if (e.keyCode == 39) { // Right arrow
+                $('#flipbook').turn('next');
             }
         });
     });

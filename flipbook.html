@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Turn.js Interactive Flipbook</title>
+  <title>RUSTED</title>
 
   <!-- jQuery -->
   <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
@@ -32,6 +32,22 @@
       border-radius: 5px;
       box-shadow: 0 0 20px rgba(0,0,0,0.2);
       position: relative;
+    }
+
+    .book-binding {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 4px;  /* Width of the binding */
+      background: linear-gradient(
+        to right,
+        rgba(0,0,0,0.1) 0%,
+        rgba(0,0,0,0.2) 50%,
+        rgba(0,0,0,0.1) 100%
+      );
+      z-index: 1000;
+      pointer-events: none;
     }
 
     #flipbook {
@@ -209,6 +225,34 @@
         font-weight: 400;
         letter-spacing: 0.2px;
     }
+
+    /* Navigation buttons */
+    .nav-button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        padding: 15px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 18px;
+        transition: background 0.3s ease;
+        z-index: 1000;
+    }
+
+    .nav-button:hover {
+        background: rgba(0, 0, 0, 0.8);
+    }
+
+    .prev-button {
+        left: -60px;
+    }
+
+    .next-button {
+        right: -60px;
+    }
   </style>
 </head>
 <body>
@@ -216,6 +260,9 @@
     <h1>RUSTED</h1>
     <div class="portfolio-subtitle">by Fairus Nahiyan</div>
     <div class="book-container">
+      <button class="nav-button prev-button">←</button>
+      <button class="nav-button next-button">→</button>
+      <div class="book-binding"></div>
       <div id="flipbook">
         <!-- Text pages (first page acts as cover) -->
         <div class="page">
@@ -300,8 +347,12 @@
         duration: 1500,
         when: {
           turning: function(event, page, view) {
+            // Hide binding when page starts turning
+            $('.book-binding').fadeOut(200);
           },
           turned: function(event, page, view) {
+            // Show binding after page turn completes
+            $('.book-binding').fadeIn(200);
           }
         }
       });
@@ -321,19 +372,18 @@
     });
   </script>
 
-  <!-- Add this script section right before the closing </body> tag -->
   <script>
     $(document).ready(function() {
-        // Keyboard navigation
-        $(document).keydown(function(e) {
-            if (e.keyCode == 37) { // Left arrow
-                $('#flipbook').turn('previous');
-            } else if (e.keyCode == 39) { // Right arrow
-                $('#flipbook').turn('next');
-            }
+        // Button navigation
+        $('.prev-button').click(function() {
+            $('#flipbook').turn('previous');
         });
 
-        // Click navigation - fixed version
+        $('.next-button').click(function() {
+            $('#flipbook').turn('next');
+        });
+
+        // Click navigation on pages
         $('.page').click(function(e) {
             const rect = this.getBoundingClientRect();
             const clickX = e.clientX - rect.left;
@@ -342,6 +392,15 @@
                 $('#flipbook').turn('next');
             } else {
                 $('#flipbook').turn('previous');
+            }
+        });
+
+        // Keyboard navigation
+        $(document).keydown(function(e) {
+            if (e.keyCode == 37) { // Left arrow
+                $('#flipbook').turn('previous');
+            } else if (e.keyCode == 39) { // Right arrow
+                $('#flipbook').turn('next');
             }
         });
     });
